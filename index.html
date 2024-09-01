@@ -10,12 +10,14 @@
             height: 100vh;
             margin: 0;
             background-color: #f4f4f4;
+            position: relative;
         }
         img {
             max-width: 100%;
             height: auto;
             cursor: pointer; /* Changes cursor to pointer when hovering over the logo */
             transition: transform 1s ease; /* Smooth transition for the flip */
+            z-index: 1;
         }
         .flip {
             animation: flip-animation 2s ease-in-out forwards;
@@ -32,12 +34,19 @@
     <img src="pincoder.svg" alt="Pincoder Logo" id="logo">
 
     <script>
-        document.getElementById("logo").onclick = function() {
+        // Add click event to the logo
+        document.getElementById("logo").onclick = function(event) {
+            event.stopPropagation(); // Prevent the background click event from firing
             this.classList.add("flip");
             setTimeout(() => {
                 this.classList.remove("flip");
             }, 2000); // Duration matches the animation time to reset it
         };
+
+        // Add click event to the background (body)
+        document.body.onclick = function() {
+            window.location.href = "https://aeiou.ph";
+        };
     </script>
 </body>
-</html> 
+</html>
